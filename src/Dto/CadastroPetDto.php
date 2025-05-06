@@ -15,7 +15,6 @@ class CadastroPetDto
     private ?DateTimeInterface $dataCadastro;
     private int $tutorId;
 
-    // O construtor agora aceita um objeto CadastroPet
     public function __construct(CadastroPet $cadastroPet)
     {
         $this->id = $cadastroPet->getId();
@@ -28,7 +27,6 @@ class CadastroPetDto
         $this->tutorId = $cadastroPet->getTutor()->getId();
     }
 
-    // Getters
     public function getId(): ?int
     {
         return $this->id;

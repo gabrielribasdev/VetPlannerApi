@@ -24,7 +24,10 @@ class Agendamentos
     private ?\DateTimeInterface $horario = null;
 
     #[ORM\ManyToOne]
-    private ?servicos $servico = null;
+    private ?Servicos $servico = null;
+
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 0, nullable: true)]
+    private ?string $preco = null;
 
     public function getId(): ?int
     {
@@ -75,6 +78,18 @@ class Agendamentos
     public function setServico(?servicos $servico): static
     {
         $this->servico = $servico;
+
+        return $this;
+    }
+
+    public function getPreco(): ?string
+    {
+        return $this->preco;
+    }
+
+    public function setPreco(?string $preco): static
+    {
+        $this->preco = $preco;
 
         return $this;
     }

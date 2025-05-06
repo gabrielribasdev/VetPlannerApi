@@ -23,10 +23,6 @@ class CadastroPetController extends AbstractController
             return $this->json(['error' => 'Dados insuficientes para cadastrar o pet.'], 400);
         }
 
-        $petDto = new CadastroPetDto(
-            new CadastroPet() 
-        );
-
         $em = $doctrine->getManager();
         $pet = new CadastroPet();
         $pet->setNome($data['nome']);
@@ -45,5 +41,34 @@ class CadastroPetController extends AbstractController
             'message' => 'Pet cadastrado com sucesso!',
            
         ], 201); 
+    }
+
+    #[Route('/cadastro/pet/listar', name: 'listar_pets', methods: ['GET'])]
+    public function listarPets(ManagerRegistry $doctrine): JsonResponse
+    {
+        $pets = $doctrine->getRepository(CadastroPet::class)->findAll();
+
+        if (empty($pets)) {
+            return $this->json(['message' => 'Nenhum pet encontrado.'], 404);
+        }
+
+        $petsData = [];
+        foreach ($pets as $pet) {
+            $petsData[] = [
+                'id' => $pet->getId(),
+                'nome' => $pet->getNome(),
+                'idade' => $pet->getIdade(),
+                'sexo' => $pet->getSexo(),
+                'peso' => $pet->getPeso(),
+                'raca' => $pet->getRaca(),
+                'dataCadastro' => $pet->getDataCadastro()->format('Y-m-d'),
+                'tutor' => [
+                    'id' => $pet->getTutor()->getId(),
+                    'nome' => $pet->getTutor()->getNome(),
+                ],
+            ];
+        }
+
+        return $this->json($petsData);
     }
 }
