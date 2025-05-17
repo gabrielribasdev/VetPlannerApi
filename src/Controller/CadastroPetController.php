@@ -33,14 +33,14 @@ class CadastroPetController extends AbstractController
         $pet->setDataCadastro(new \DateTime());
         $tutor = $doctrine->getRepository(CadastroTutor::class)->find($data['tutorId']);
         $pet->setTutor($tutor);
-        
+
         $em->persist($pet);
         $em->flush();
 
         return $this->json([
             'message' => 'Pet cadastrado com sucesso!',
-           
-        ], 201); 
+
+        ], 201);
     }
 
     #[Route('/cadastro/pet/listar', name: 'listar_pets', methods: ['GET'])]

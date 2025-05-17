@@ -15,11 +15,11 @@ class ServicosController extends AbstractController
     public function listarServicos(ManagerRegistry $doctrine): JsonResponse
     {
         $servicos = $doctrine->getRepository(Servicos::class)->findAll();
-    
+
         if (empty($servicos)) {
             return $this->json([]);
         }
-    
+
         $data = [];
         foreach ($servicos as $servico) {
             $data[] = [
@@ -30,7 +30,7 @@ class ServicosController extends AbstractController
                 'observacao' => $servico->getObservacao(),
             ];
         }
-    
+
         return $this->json($data);
     }
 }

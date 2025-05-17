@@ -68,5 +68,13 @@ class AgendamentosController extends AbstractController
 
         return $this->json($data);
     }
+
+    #[Route('/agendamentos/dashboard', name: 'listar_dados_dashboard', methods: ['GET'])]
+    public function listarDadosDashboard(ManagerRegistry $doctrine): JsonResponse
+    {
+        $agendamentos = $doctrine->getRepository(Agendamentos::class)->getResumoAgendamentos();
+
+        return $this->json($agendamentos);
+    }
         
 }

@@ -26,6 +26,9 @@ class Servicos
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $observacao = null;
 
+    #[ORM\Column(length: 20)]
+    private ?string $cor = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +78,18 @@ class Servicos
     public function setObservacao(?string $observacao): static
     {
         $this->observacao = $observacao;
+
+        return $this;
+    }
+
+    public function getCor(): ?string
+    {
+        return $this->cor;
+    }
+
+    public function setCor(string $cor): static
+    {
+        $this->cor = $cor;
 
         return $this;
     }

@@ -2,18 +2,18 @@
 
 namespace App\Repository;
 
-use App\Entity\CadastroPet;
+use App\Entity\Vacinas;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<CadastroPet>
+ * @extends ServiceEntityRepository<Vacinas>
  */
-class CadastroPetRepository extends ServiceEntityRepository
+class VacinasRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, CadastroPet::class);
+        parent::__construct($registry, Vacinas::class);
     }
 
     
